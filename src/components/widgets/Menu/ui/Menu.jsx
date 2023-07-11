@@ -8,7 +8,7 @@ function Menu() {
         <ul className={styles.menu}>
             <li>
                 <NavLink
-                    to="/"
+                    to="/news-list"
                     className={({ isActive, isPending }) =>
                         isPending ? "pending" : isActive ? styles.active : ""
                     }
@@ -19,7 +19,7 @@ function Menu() {
             </li>
             <li>
                 <NavLink
-                    to="/all"
+                    to="/news-list/all"
                     className={({ isActive, isPending }) =>
                         isPending ? "pending" : isActive ? styles.active : ""
                     }

@@ -17,6 +17,7 @@
     "swr": "^2.2.0",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://griffollion.github.io/news-list",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

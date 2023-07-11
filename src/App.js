@@ -31,10 +31,10 @@ function App() {
           <SiteFilter/>
 
           <Routes>
-            <Route path="/" element={<NewsList data={news} />} />
+            <Route path="news-list" element={<NewsList data={news} />} />
           </Routes>
           <Routes>
-            <Route path="/all" element={<NewsList data={parsedNews.items} />} />
+            <Route path="news-list/all" element={<NewsList data={parsedNews.items} />} />
           </Routes>
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>

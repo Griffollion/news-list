@@ -1,0 +1,17 @@
+
+.App {
+    padding-bottom: 100px;
+}
+.floating-button {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 20px 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.floating-button-wrapper {
+    display: flex;
+    justify-content: center;
+}

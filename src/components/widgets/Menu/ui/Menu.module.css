@@ -1,0 +1,30 @@
+.menu {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+.menu>li {
+    flex-shrink: 0;
+    margin-bottom: 40px;
+}
+
+.menu>li>a {
+    text-decoration: none;
+    transition: color .25s;
+    color: #388EC3;
+}
+
+.menu>li>a:hover,
+.menu>li>a:focus, 
+.menu>li>a:visited {
+    color: #388EC3;
+}
+
+.menu>li>a.active {
+    color: #000;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #95CE5A;
+}

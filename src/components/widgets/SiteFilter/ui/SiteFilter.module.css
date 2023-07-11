@@ -1,0 +1,6 @@
+.site-filter {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    margin-bottom: 16px;
+}

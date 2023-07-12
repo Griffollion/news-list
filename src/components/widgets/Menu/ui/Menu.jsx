@@ -1,28 +1,30 @@
-import { NavLink } from 'react-router-dom';
-import { cn } from 'classnames'
+import { NavLink, Link } from 'react-router-dom';
+import cn from 'classnames'
 import styles from './Menu.module.css'
+import { useLocation } from "react-router-dom";
 
 
 function Menu() {
+    const location = useLocation();
     return (
         <ul className={styles.menu}>
             <li>
                 <NavLink
                     to="/news-list"
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? styles.active : ""
-                    }
+                    className={cn({
+                        [styles.active]: location.pathname === "/news-list"
+                    })}
                 >
-                    Новости за сегодня
+                    Сегодняшние новости
                 </NavLink>
 
             </li>
             <li>
                 <NavLink
                     to="/news-list/all"
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? styles.active : ""
-                    }
+                    className={cn({
+                        [styles.active]: location.pathname === "/news-list/all"
+                    })}
                 >
                     Все новости
                 </NavLink>

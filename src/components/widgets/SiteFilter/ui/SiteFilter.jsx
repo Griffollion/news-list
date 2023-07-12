@@ -13,9 +13,11 @@ function SiteFilter({ ...props }) {
     }
     return (<div className={styles['site-filter']} {...props}>
         <Chip onClick={() => handleClick('all')} active={activeSource === 'all'}>Все</Chip>
-        <Chip onClick={() => handleClick('rbc.ru')} active={activeSource === 'rbc.ru'}>RBK</Chip>
-        <Chip onClick={() => handleClick('ria.ru')} active={activeSource === 'ria.ru'}>RIA</Chip>
-        <Chip onClick={() => handleClick('kommersant.ru')} active={activeSource === 'kommersant.ru'}>KOMMERSANT</Chip>
+        <Chip onClick={() => handleClick('rbc.ru')} active={activeSource === 'rbc.ru'}>РБК</Chip>
+        <Chip onClick={() => handleClick('ria.ru')} active={activeSource === 'ria.ru'}>РИА</Chip>
+        <Chip onClick={() => handleClick('kommersant.ru')} active={activeSource === 'kommersant.ru'}>Коммерсант</Chip>
+        <Chip onClick={() => handleClick('iz.ru')} active={activeSource === 'iz.ru'}>Известия</Chip>
+        <Chip onClick={() => handleClick('1prime.ru')} active={activeSource === '1prime.ru'}>Прайм</Chip>
     </div>);
 }
 

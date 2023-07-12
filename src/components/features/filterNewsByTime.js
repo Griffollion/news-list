@@ -14,10 +14,11 @@ export const sortObjectsByPublicationTime = (objects) => {
 }
 
 export const filterNewsByTime = (news, currentDate) => {
+  const parsingSplittedDate = currentDate.split('.')
   const formattedNews = news.map(i => {
     const splittedDate = i?.publicationTime.split(',')
     if (splittedDate.length > 1) {
-      if (splittedDate[0] === currentDate) {
+      if (splittedDate[0] === currentDate || splittedDate[0] === parsingSplittedDate[0] +' июля '+parsingSplittedDate[2]) {
         const copy = { ...i }
         copy.publicationTime = splittedDate[1].trim()
         return copy

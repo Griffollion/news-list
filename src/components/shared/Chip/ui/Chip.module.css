@@ -20,4 +20,8 @@
     .chip:hover {
         color: #7bc057;
     }
+
+    .chip.active:hover {
+        color: #fff;
+    }
 }

@@ -1,5 +1,24 @@
 .news-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 28px
+    grid-template-columns: repeat(1, 100%);
+    grid-gap: 20px
+}
+
+@media screen and (min-width: 600px) {
+    .news-list {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 28px
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .news-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .news-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }

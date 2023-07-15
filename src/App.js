@@ -11,6 +11,7 @@ import { filterNewsByTime } from 'components/features/filterNewsByTime';
 import { getAllNews, getTodaysNews} from 'components/features/newsSlice'
 import { NewsList } from 'components/widgets/NewsList';
 import { SiteFilter } from 'components/widgets/SiteFilter';
+import axios from 'axios';
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +25,15 @@ function App() {
     const todays = filterNewsByTime(parsedNews?.items, parsedNews?.updateDate)
     dispatch(getTodaysNews(todays))
   }, [])
+
+
+  const getNewsFullText = () => {
+
+
+      axios.get('http://localhost:8000/parser/detail2?source=ria.ru&url=https://ria.ru/20230713/ukraina-1883928409.html').then(res => {
+        console.log(res)
+      })
+  }
 
   return (
     <BrowserRouter>
@@ -44,7 +54,7 @@ function App() {
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            <Button onClick={() => alert('Функционал находится в разработке')}>Сократить текст выбранных новостей</Button>
+            <Button onClick={() => getNewsFullText()}>Сократить текст выбранных новостей</Button>
           </div>
         </div>}
       </div>

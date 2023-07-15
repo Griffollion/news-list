@@ -5,7 +5,8 @@ const initialState = {
   allNewsTmp: [],
   todaysNews: [],
   todaysNewsTmp: [],
-  activeSource: 'all'
+  activeSource: 'all',
+  activeTag: 'all',
 }
 
 export const newsStore = createSlice({
@@ -29,13 +30,25 @@ export const newsStore = createSlice({
         state.todaysNews = state.todaysNewsTmp.filter(i => i.source === action.payload)
       }
     },
+    filterNewsByTag: (state, action) => {
+      if (action.payload === 'all') {
+        state.allNews = state.allNewsTmp
+        state.todaysNews = state.todaysNewsTmp
+      } else {
+        state.allNews = state.allNewsTmp.filter(i => i.tag === action.payload)
+        state.todaysNews = state.todaysNewsTmp.filter(i => i.tag === action.payload)
+      }
+    },
     setActiveSource: (state, action) => {
       state.activeSource = action.payload
+    },
+    setActiveTag: (state, action) => {
+      state.activeTag = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { getTodaysNews, getAllNews, filterNewsBySource, setActiveSource } = newsStore.actions
+export const { getTodaysNews, getAllNews, filterNewsBySource,filterNewsByTag, setActiveSource,setActiveTag } = newsStore.actions
 
 export default newsStore.reducer

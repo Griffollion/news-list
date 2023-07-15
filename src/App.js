@@ -8,9 +8,10 @@ import { Menu } from 'components/widgets/Menu';
 import { Container } from 'components/shared/Container';
 import { Button } from 'components/shared/Button';
 import { filterNewsByTime } from 'components/features/filterNewsByTime';
-import { getAllNews, getTodaysNews} from 'components/features/newsSlice'
+import { getAllNews, getTodaysNews } from 'components/features/newsSlice'
 import { NewsList } from 'components/widgets/NewsList';
 import { SiteFilter } from 'components/widgets/SiteFilter';
+import { TagsFilter } from 'components/widgets/TagsFilter';
 import axios from 'axios';
 
 function App() {
@@ -27,12 +28,16 @@ function App() {
   }, [])
 
 
-  const getNewsFullText = () => {
+  const getNewsFullText = (data) => {
 
-
-      axios.get('http://localhost:8000/parser/detail2?source=ria.ru&url=https://ria.ru/20230713/ukraina-1883928409.html').then(res => {
-        console.log(res)
-      })
+    console.log(data)
+    axios.get('http://localhost:8000/parser/detail', {
+      params: {
+        data: data
+      }
+    }).then(res => {
+      console.log(res)
+    }).catch(e => console.error(e))
   }
 
   return (
@@ -43,7 +48,11 @@ function App() {
 
           <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
           <Menu />
+          <div>Ресурсы</div>
           <SiteFilter />
+
+          <div>Теги</div>
+          <TagsFilter />
 
           <Routes>
             <Route path="/news-list" element={<NewsList data={todaysNews} />} />
@@ -54,7 +63,7 @@ function App() {
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            <Button onClick={() => getNewsFullText()}>Сократить текст выбранных новостей</Button>
+            <Button onClick={() => getNewsFullText(selectedNews)}>Сократить текст выбранных новостей</Button>
           </div>
         </div>}
       </div>

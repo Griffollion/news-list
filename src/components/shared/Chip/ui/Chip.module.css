@@ -10,6 +10,18 @@
     line-height: 16px;
 }
 
+.chip.s {
+    font-size: 14px;
+    line-height: 14px;
+    padding: 6px 12px;
+}
+
+.chip.l {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 8px 14px;
+}
+
 .chip.active {
     background-color: #55a3ed;
     border-color: #55a3ed;

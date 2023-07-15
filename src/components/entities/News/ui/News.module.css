@@ -33,9 +33,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
 }
-
+.tags-wrapper {
+    display: flex;
+    gap: 12px;
+}
 .source,
+.tag,
 .publication-time {
     font-size: 14px;
     color: #6B737D;

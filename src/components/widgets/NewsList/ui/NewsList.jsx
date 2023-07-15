@@ -11,7 +11,7 @@ function NewsList({ data }) {
     }
     return (
         <div className={styles['news-list']}>
-            {data.map(i => <News data={i} key={i.id} onClick={() => handleClick(i.id)} />)}
+            {data.map(i => <News data={i} key={i.id} onClick={() => handleClick(i)} />)}
         </div>
     );
 }

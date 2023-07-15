@@ -6,7 +6,7 @@ function News({data, ...props}) {
     const selectedNews = useSelector((state) => state.selectedNews.data)
     return (
         <div className={cn(styles.news, {
-            [styles.active]: selectedNews.find(i => i === data.id)
+            [styles.active]: selectedNews.find(i => i.id === data.id)
         })} {...props}>
             {data?.title && <div className={styles['news-title']}>
                 {data.title}
@@ -17,9 +17,15 @@ function News({data, ...props}) {
             </div>}
 
             <div className={styles.footer}>
-                <div className={styles.source}>
-                    {data?.source}
+                <div className={styles['tags-wrapper']}>
+                    <div className={styles.source}>
+                        {data?.source}
+                    </div>
+                    {data?.tag && <div className={styles.tag}>
+                        {data.tag}
+                    </div>}
                 </div>
+               
 
                 <div className={styles['publication-time']}>
                     {data?.publicationTime}

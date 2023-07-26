@@ -31,10 +31,13 @@ function App() {
   const getNewsFullText = (data) => {
 
     console.log(data)
-    axios.get('http://localhost:8000/parser/detail', {
-      params: {
-        data: data
-      }
+    axios({
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: "https://localhost:4443/parser/detail",
+      data: data
     }).then(res => {
       console.log(res)
     }).catch(e => console.error(e))
@@ -47,13 +50,14 @@ function App() {
         <Container>
 
           <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
-          <Menu />
-          <div>Ресурсы</div>
+          
+          <div className='subtitle'>Ресурсы</div>
           <SiteFilter />
 
-          <div>Теги</div>
+          <div className='subtitle'>Теги</div>
           <TagsFilter />
 
+          <Menu />
           <Routes>
             <Route path="/news-list" element={<NewsList data={todaysNews} />} />
           </Routes>

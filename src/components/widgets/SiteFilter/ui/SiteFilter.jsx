@@ -11,13 +11,13 @@ function SiteFilter({ ...props }) {
         dispatch(filterNewsBySource(sourse))
         dispatch(setActiveSource(sourse))
     }
-    return (<div className={styles['site-filter']} {...props}>
-        <Chip onClick={() => handleClick('all')} active={activeSource === 'all'}>Все</Chip>
-        <Chip onClick={() => handleClick('rbc.ru')} active={activeSource === 'rbc.ru'}>РБК</Chip>
-        <Chip onClick={() => handleClick('ria.ru')} active={activeSource === 'ria.ru'}>РИА</Chip>
-        <Chip onClick={() => handleClick('kommersant.ru')} active={activeSource === 'kommersant.ru'}>Коммерсант</Chip>
-        <Chip onClick={() => handleClick('iz.ru')} active={activeSource === 'iz.ru'}>Известия</Chip>
-        <Chip onClick={() => handleClick('1prime.ru')} active={activeSource === '1prime.ru'}>Прайм</Chip>
+    return (<div className={styles['filter-wrapper']} {...props}>
+        <Chip size="l" onClick={() => handleClick('all')} active={activeSource === 'all'}>Все</Chip>
+        <Chip size="l" onClick={() => handleClick('rbc.ru')} active={activeSource === 'rbc.ru'}>РБК</Chip>
+        <Chip size="l" onClick={() => handleClick('ria.ru')} active={activeSource === 'ria.ru'}>РИА</Chip>
+        <Chip size="l" onClick={() => handleClick('kommersant.ru')} active={activeSource === 'kommersant.ru'}>Коммерсант</Chip>
+        <Chip size="l" onClick={() => handleClick('iz.ru')} active={activeSource === 'iz.ru'}>Известия</Chip>
+        <Chip size="l" onClick={() => handleClick('1prime.ru')} active={activeSource === '1prime.ru'}>Прайм</Chip>
     </div>);
 }
 

@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const selectedNews = createSlice({
-  name: 'counter',
+  name: 'selectedNews',
   initialState,
   reducers: {
     addNews: (state, action) => {

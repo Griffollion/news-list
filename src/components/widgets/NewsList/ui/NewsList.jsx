@@ -10,9 +10,12 @@ function NewsList({ data }) {
         dispatch(addNews(data))
     }
     return (
-        <div className={styles['news-list']}>
-            {data.map(i => <News data={i} key={i.id} onClick={() => handleClick(i)} />)}
-        </div>
+        <>
+            {!!data?.length && <div className={styles['news-list']}>
+                {data.map(i => <News data={i} key={i.id} onClick={() => handleClick(i)} />)}
+            </div>}
+            {!data?.length && <div>Новостей нет</div>}
+        </>
     );
 }
 

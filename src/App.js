@@ -28,9 +28,8 @@ function App() {
   }, [])
 
 
-  const getNewsFullText = (data) => {
-
-    console.log(data)
+  const getNewsFullText = (data
+    ) => {
     axios({
       method: "post",
       headers: {
@@ -38,6 +37,19 @@ function App() {
       },
       url: "https://localhost:4443/parser/detail",
       data: data
+    }).then(res => {
+      console.log(res)
+    }).catch(e => console.error(e))
+  }
+
+  const getShortNews = () => {
+    axios({
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: "https://localhost:4443//parsers/get-short-news",
+      data: {}
     }).then(res => {
       console.log(res)
     }).catch(e => console.error(e))
@@ -67,7 +79,9 @@ function App() {
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            <Button onClick={() => getNewsFullText(selectedNews)}>Сократить текст выбранных новостей</Button>
+            <Button onClick={() => getNewsFullText(selectedNews)}>Сделать выжимку для Telegram</Button>
+            <Button onClick={() => getNewsFullText(selectedNews)}>Сделать рерайт новостей</Button>
+            <Button onClick={() => getShortNews()}>Получить короткие новости</Button>
           </div>
         </div>}
       </div>

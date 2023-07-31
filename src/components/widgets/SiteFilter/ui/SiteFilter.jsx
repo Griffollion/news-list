@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './SiteFilter.module.css'
 import { Chip } from 'components/shared/Chip';
-import { filterNewsBySource, setActiveSource } from 'components/features/newsSlice'
+import { filterNewsBySource, setActiveSource } from 'store/newsSlice'
 
 
 function SiteFilter({ ...props }) {

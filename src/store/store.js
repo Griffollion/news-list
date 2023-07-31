@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import selectedNewsReducer from '../components/features/selectedNewsSlice'
-import newsStoreReducer from '../components/features/newsSlice'
+import selectedNewsReducer from './selectedNewsSlice'
+import newsStoreReducer from './newsSlice'
+import processedNewsStoreReducer from './processedNewsSlice'
 
 export const store = configureStore({
   reducer: {
     selectedNews: selectedNewsReducer,
-    newsStore: newsStoreReducer
+    newsStore: newsStoreReducer,
+    processedNewsStore: processedNewsStoreReducer
   },
 })

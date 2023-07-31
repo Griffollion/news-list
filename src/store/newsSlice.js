@@ -1,12 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+
+export const getParsedNews = createAsyncThunk(
+  '@@news/get-parsed-news',
+  async () => {
+    try {
+      const res = await axios({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        url: 'https://localhost:4443//parsers/get-short-news',
+        data: {}
+      })
+      return res.data.data
+    } catch (e) {
+      console.log(e)
+    }
+  })
+
 
 const initialState = {
+  parsedNews: [],
   allNews: [],
   allNewsTmp: [],
   todaysNews: [],
   todaysNewsTmp: [],
   activeSource: 'all',
   activeTag: 'all',
+  loading: 'loading',
+  error: null
 }
 
 export const newsStore = createSlice({
@@ -58,6 +82,21 @@ export const newsStore = createSlice({
       state.activeTag = action.payload
     }
   },
+  extraReducers: builder => {
+    builder
+        .addCase(getParsedNews.fulfilled, (state, action) => {
+            state.parsedNews = action.payload
+            state.loading = 'idle'
+        })
+        .addCase(getParsedNews.pending, (state) => {
+            state.loading = 'loading'
+            state.error = null
+        })
+        .addCase(getParsedNews.rejected, (state) => {
+            state.loading = 'idle'
+            state.error = "Не сработал парсинг новостей"
+        })
+}
 })
 
 // Action creators are generated for each case reducer function

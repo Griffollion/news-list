@@ -3,33 +3,45 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import parsedNews from 'mock/data.json'
+//import parsedNews from 'mock/data.json'
 import { Menu } from 'components/widgets/Menu';
 import { Container } from 'components/shared/Container';
 import { Button } from 'components/shared/Button';
 import { filterNewsByTime } from 'components/features/filterNewsByTime';
-import { getAllNews, getTodaysNews } from 'components/features/newsSlice'
+import { getAllNews, getTodaysNews, getParsedNews } from 'store/newsSlice'
 import { NewsList } from 'components/widgets/NewsList';
 import { SiteFilter } from 'components/widgets/SiteFilter';
 import { TagsFilter } from 'components/widgets/TagsFilter';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
+import {Sugar} from 'react-preloaders';
 
 function App() {
   const dispatch = useDispatch()
+  const parsedNews = useSelector((state) => state.newsStore.parsedNews)
+  const isNewsLoading = useSelector((state) => state.newsStore.loading)
   const allNews = useSelector((state) => state.newsStore.allNews)
   const todaysNews = useSelector((state) => state.newsStore.todaysNews)
   const selectedNews = useSelector((state) => state.selectedNews.data)
+  const tgNews = useSelector((state) => state.processedNewsStore.tgNews)
 
 
   useEffect(() => {
-    dispatch(getAllNews(parsedNews.items))
-    const todays = filterNewsByTime(parsedNews?.items, parsedNews?.updateDate)
-    dispatch(getTodaysNews(todays))
+    dispatch(getParsedNews())
   }, [])
+
+  useEffect(() => {
+    if (parsedNews?.items?.length > 0) {
+      dispatch(getAllNews(parsedNews.items))
+      const todays = filterNewsByTime(parsedNews?.items, parsedNews?.updateDate)
+      dispatch(getTodaysNews(todays))
+    }
+  }, [dispatch, parsedNews])
 
 
   const getNewsFullText = (data
-    ) => {
+  ) => {
     axios({
       method: "post",
       headers: {
@@ -42,46 +54,58 @@ function App() {
     }).catch(e => console.error(e))
   }
 
-  const getShortNews = () => {
-    axios({
-      method: "post",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: "https://localhost:4443//parsers/get-short-news",
-      data: {}
-    }).then(res => {
-      console.log(res)
-    }).catch(e => console.error(e))
-  }
-
   return (
     <BrowserRouter>
 
       <div className="App">
         <Container>
 
-          <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
-          
-          <div className='subtitle'>Ресурсы</div>
-          <SiteFilter />
-
-          <div className='subtitle'>Теги</div>
-          <TagsFilter />
-
-          <Menu />
           <Routes>
-            <Route path="/news-list" element={<NewsList data={todaysNews} />} />
+            <Route path="/news-list" element={
+              <>
+                <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
+
+                <div className='subtitle'>Ресурсы</div>
+                <SiteFilter />
+
+                <div className='subtitle'>Теги</div>
+                <TagsFilter />
+                <Menu />
+                <NewsList data={todaysNews} loading={isNewsLoading} />
+              </>
+            } />
           </Routes>
           <Routes>
-            <Route path="/news-list/all" element={<NewsList data={allNews} />} />
+            <Route path="/news-list/all" element={
+              <>
+                <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
+
+                <div className='subtitle'>Ресурсы</div>
+                <SiteFilter />
+
+                <div className='subtitle'>Теги</div>
+                <TagsFilter />
+                <Menu />
+                <NewsList data={allNews} loading={isNewsLoading} />
+              </>
+            } />
+          </Routes>
+          <Routes>
+            <Route path="/tg-news" element={<TgNewsList />} />
           </Routes>
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            <Button onClick={() => getNewsFullText(selectedNews)}>Сделать выжимку для Telegram</Button>
-            <Button onClick={() => getNewsFullText(selectedNews)}>Сделать рерайт новостей</Button>
-            <Button onClick={() => getShortNews()}>Получить короткие новости</Button>
+            {!loading && <Button onClick={() => getNewsFullText(selectedNews)}>Сделать выжимку для Telegram</Button>}
+            {!loading && <Button>
+              <NavLink
+                to="/tg-news"
+              >
+                Посмотреть сжатые новости
+              </NavLink>
+            </Button>}
+            {loading && <Sugar color={"#000"} />}
+            {/* <Button onClick={() => getNewsFullText(selectedNews)}>Сделать рерайт новостей</Button> */}
           </div>
         </div>}
       </div>

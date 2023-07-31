@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './TagsFilter.module.css'
 import { Chip } from 'components/shared/Chip';
-import { filterNewsByTag, setActiveTag } from 'components/features/newsSlice'
+import { filterNewsByTag, setActiveTag } from 'store/newsSlice'
 
 
 function TagsFilter({ ...props }) {

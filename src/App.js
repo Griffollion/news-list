@@ -47,7 +47,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: process.env.SERVER_URL+"/parser/detail",
+      url: process.env.API_V1_URL+"/parser/detail",
       data: data
     }).then(res => {
       console.log(res)

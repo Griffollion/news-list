@@ -25,7 +25,7 @@ function App() {
   const todaysNews = useSelector((state) => state.newsStore.todaysNews)
   const selectedNews = useSelector((state) => state.selectedNews.data)
   const tgNews = useSelector((state) => state.processedNewsStore.tgNews)
-
+  const loading = false
 
   useEffect(() => {
     dispatch(getParsedNews())

@@ -11,6 +11,12 @@
     transition: background-color .25s;
 }
 
+
+.button a {
+    color: initial;
+    text-decoration: none;
+}
+
 @media  (hover:hover) {
     .button:hover {
         background-color: #83b54e;

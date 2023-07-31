@@ -11,7 +11,7 @@ export const getParsedNews = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json'
         },
-        url: process.env.API_V1_URL+'/parsers/get-short-news',
+        url: process.env.REACT_APP_API_V1_URL+'/parsers/get-short-news',
         data: {}
       })
       return res.data.data

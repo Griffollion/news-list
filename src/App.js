@@ -47,7 +47,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "https://localhost:4443/parser/detail",
+      url: process.env.SERVER_URL+"/parser/detail",
       data: data
     }).then(res => {
       console.log(res)

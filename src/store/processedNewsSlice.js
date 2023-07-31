@@ -11,7 +11,7 @@ export const getTgNews = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json'
         },
-        url: 'https://localhost:4443//get-tg-news',
+        url: process.env.SERVER_URL+'/get-tg-news',
         data: {}
       })
       return res.data?.items

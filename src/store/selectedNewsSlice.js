@@ -9,8 +9,8 @@ export const selectedNews = createSlice({
   initialState,
   reducers: {
     addNews: (state, action) => {
-      if (!!state.data.find(i => i === action.payload)) {
-        state.data = state.data.filter(i => i !== action.payload)
+      if (!!state.data.find(i => i?.id === action.payload?.id)) {
+        state.data = state.data.filter(i => i.id !== action.payload.id)
       } else {
         state.data = [...state.data, action.payload]
       }

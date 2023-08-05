@@ -16,6 +16,7 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
 import {Sugar} from 'react-preloaders';
+import { getNewsFullText } from 'store/fullNewsTextSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ function App() {
   const todaysNews = useSelector((state) => state.newsStore.todaysNews)
   const selectedNews = useSelector((state) => state.selectedNews.data)
   const tgNews = useSelector((state) => state.processedNewsStore.tgNews)
-  const loading = false
+  const loading = useSelector((state) => state.fullNewsTextsStore.loading)
 
   useEffect(() => {
     dispatch(getParsedNews())
@@ -40,19 +41,19 @@ function App() {
   }, [dispatch, parsedNews])
 
 
-  const getNewsFullText = (data
-  ) => {
-    axios({
-      method: "post",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: process.env.REACT_APP_API_V1_URL+"/parser/detail",
-      data: data
-    }).then(res => {
-      console.log(res)
-    }).catch(e => console.error(e))
-  }
+  // const getNewsFullText = (data
+  // ) => {
+  //   axios({
+  //     method: "post",
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     url: process.env.REACT_APP_API_V1_URL+"/parser/detail",
+  //     data: data
+  //   }).then(res => {
+  //     console.log(res)
+  //   }).catch(e => console.error(e))
+  // }
 
   return (
     <BrowserRouter>
@@ -96,15 +97,15 @@ function App() {
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            {!loading && <Button onClick={() => getNewsFullText(selectedNews)}>Сделать выжимку для Telegram</Button>}
-            {!loading && <Button>
+            {loading === 'idle' && <Button onClick={() => dispatch(getNewsFullText(selectedNews))}>Сделать выжимку для Telegram</Button>}
+            {loading === 'idle' && <Button>
               <NavLink
                 to="/tg-news"
               >
                 Посмотреть сжатые новости
               </NavLink>
             </Button>}
-            {loading && <Sugar color={"#000"} />}
+            {loading === 'loading' && <div>loading...</div>}
             {/* <Button onClick={() => getNewsFullText(selectedNews)}>Сделать рерайт новостей</Button> */}
           </div>
         </div>}

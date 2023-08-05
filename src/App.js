@@ -15,7 +15,7 @@ import { TagsFilter } from 'components/widgets/TagsFilter';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
-import {Sugar} from 'react-preloaders';
+import { Sugar } from 'react-preloaders';
 import { getNewsFullText } from 'store/fullNewsTextSlice';
 
 function App() {
@@ -97,16 +97,13 @@ function App() {
         </Container>
         {!!selectedNews?.length && <div className='floating-button'>
           <div className='floating-button-wrapper'>
-            {loading === 'idle' && <Button onClick={() => dispatch(getNewsFullText(selectedNews))}>Сделать выжимку для Telegram</Button>}
-            {loading === 'idle' && <Button>
-              <NavLink
-                to="/tg-news"
-              >
-                Посмотреть сжатые новости
-              </NavLink>
-            </Button>}
+            {loading === 'idle' && <Button onClick={() => dispatch(getNewsFullText(selectedNews))}>Сделать рерайт и краткую выжимку выбранных новостей</Button>}
+            {loading === 'idle' && <NavLink
+              to="/tg-news"
+            ><Button>
+                Посмотреть результат
+              </Button></NavLink>}
             {loading === 'loading' && <div>loading...</div>}
-            {/* <Button onClick={() => getNewsFullText(selectedNews)}>Сделать рерайт новостей</Button> */}
           </div>
         </div>}
       </div>

@@ -9,16 +9,19 @@ export const selectedNews = createSlice({
   initialState,
   reducers: {
     addNews: (state, action) => {
-      if (!!state.data.find(i => i === action.payload)) {
-        state.data = state.data.filter(i => i !== action.payload)
+      if (!!state.data.find(i => i?.id === action.payload?.id)) {
+        state.data = state.data.filter(i => i.id !== action.payload.id)
       } else {
         state.data = [...state.data, action.payload]
       }
+    },
+    resetSelectedNews: (state) => {
+      state.data = []
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addNews } = selectedNews.actions
+export const { addNews,resetSelectedNews } = selectedNews.actions
 
 export default selectedNews.reducer

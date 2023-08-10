@@ -46,3 +46,16 @@
     font-size: 14px;
     color: #6B737D;
 }
+
+.copy {
+    width: 20px;
+    height: 20px;
+    transition: transform .25s;
+    color: #6B737D;
+}
+
+@media (hover: hover) {
+    .copy:hover {
+        transform: scale(1.1);
+    }
+}

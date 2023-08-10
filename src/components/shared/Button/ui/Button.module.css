@@ -1,14 +1,15 @@
 .button {
     font-size: 16px;
     color: #fff;
-    padding: 12px 24px;
+    padding: 11px 23px;
+    border: 1px solid #95CE5A;
     border-radius: 8px;
     background-color: #95CE5A;
     display: inline-block;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color .25s;
+    transition: background-color .25s, border-color .25s;
 }
 
 
@@ -17,12 +18,34 @@
     text-decoration: none;
 }
 
-@media  (hover:hover) {
-    .button:hover {
-        background-color: #83b54e;
-    }
-}
+
 
 .button.block {
     display: block;
+}
+
+/* ghost */
+.button.ghost {
+    background-color: #fff;
+    color: #000;
+    border-color: #dadee2;
+}
+
+/* ghost //end */
+
+
+@media (hover:hover) {
+    .button:hover {
+        background-color: #83b54e;
+        border-color: #83b54e;
+    }
+
+
+    /* ghost */
+    .button.ghost:hover {
+        background-color: #fff;
+        border-color: #333e50;
+    }
+
+    /* ghost //end */
 }

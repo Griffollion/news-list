@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const getNewsFullText = createAsyncThunk(
+export const getNewsFullTexts = createAsyncThunk(
     '@@full-news-texts/get-news-full-text',
     async (data) => {
         try {
@@ -33,15 +33,15 @@ export const fullNewsTextStore = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(getNewsFullText.fulfilled, (state, action) => {
-                state.newsFullTexts = action.payload
+            .addCase(getNewsFullTexts.fulfilled, (state, action) => {
+                state.newsFullTexts = action.payload?.data?.items
                 state.loading = 'idle'
             })
-            .addCase(getNewsFullText.pending, (state) => {
+            .addCase(getNewsFullTexts.pending, (state) => {
                 state.loading = 'loading'
                 state.error = null
             })
-            .addCase(getNewsFullText.rejected, (state) => {
+            .addCase(getNewsFullTexts.rejected, (state) => {
                 state.loading = 'idle'
                 state.error = "Не удалось получить полные тексты для новостей"
             })

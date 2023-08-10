@@ -14,11 +14,14 @@ export const selectedNews = createSlice({
       } else {
         state.data = [...state.data, action.payload]
       }
+    },
+    resetSelectedNews: (state) => {
+      state.data = []
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addNews } = selectedNews.actions
+export const { addNews,resetSelectedNews } = selectedNews.actions
 
 export default selectedNews.reducer

@@ -16,7 +16,8 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
 import { Sugar } from 'react-preloaders';
-import { getNewsFullText } from 'store/fullNewsTextSlice';
+import { getNewsFullTexts } from 'store/fullNewsTextSlice';
+import { resetSelectedNews } from 'store/selectedNewsSlice';
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ function App() {
   const selectedNews = useSelector((state) => state.selectedNews.data)
   const tgNews = useSelector((state) => state.processedNewsStore.tgNews)
   const loading = useSelector((state) => state.fullNewsTextsStore.loading)
+  const newsFullTexts = useSelector((state) => state.fullNewsTextsStore.newsFullTexts)
 
   useEffect(() => {
     dispatch(getParsedNews())
@@ -41,19 +43,10 @@ function App() {
   }, [dispatch, parsedNews])
 
 
-  // const getNewsFullText = (data
-  // ) => {
-  //   axios({
-  //     method: "post",
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     url: process.env.REACT_APP_API_V1_URL+"/parser/detail",
-  //     data: data
-  //   }).then(res => {
-  //     console.log(res)
-  //   }).catch(e => console.error(e))
-  // }
+  const handleNews = (data) => {
+    dispatch(getNewsFullTexts(data))
+    dispatch(resetSelectedNews())
+  }
 
   return (
     <BrowserRouter>
@@ -73,6 +66,17 @@ function App() {
                 <TagsFilter />
                 <Menu />
                 <NewsList data={todaysNews} loading={isNewsLoading} />
+                {<div className='floating-button'>
+                  <div className='floating-button-wrapper'>
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранных новостей</Button>}
+                    {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
+                      to="/tg-news"
+                    ><Button>
+                        Посмотреть результат
+                      </Button></NavLink>}
+                    {loading === 'loading' && <div className="preloader"><span>Loading...</span></div>}
+                  </div>
+                </div>}
               </>
             } />
           </Routes>
@@ -88,6 +92,17 @@ function App() {
                 <TagsFilter />
                 <Menu />
                 <NewsList data={allNews} loading={isNewsLoading} />
+                {<div className='floating-button'>
+                  <div className='floating-button-wrapper'>
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранных новостей</Button>}
+                    {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
+                      to="/tg-news"
+                    ><Button>
+                        Посмотреть результат
+                      </Button></NavLink>}
+                    {loading === 'loading' && <div className="preloader"><span>Loading...</span></div>}
+                  </div>
+                </div>}
               </>
             } />
           </Routes>
@@ -95,17 +110,7 @@ function App() {
             <Route path="/tg-news" element={<TgNewsList />} />
           </Routes>
         </Container>
-        {!!selectedNews?.length && <div className='floating-button'>
-          <div className='floating-button-wrapper'>
-            {loading === 'idle' && <Button onClick={() => dispatch(getNewsFullText(selectedNews))}>Сделать рерайт и краткую выжимку выбранных новостей</Button>}
-            {loading === 'idle' && <NavLink
-              to="/tg-news"
-            ><Button>
-                Посмотреть результат
-              </Button></NavLink>}
-            {loading === 'loading' && <div>loading...</div>}
-          </div>
-        </div>}
+
       </div>
     </BrowserRouter>
   );

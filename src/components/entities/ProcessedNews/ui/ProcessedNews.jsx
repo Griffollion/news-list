@@ -7,13 +7,17 @@ import { useState } from "react";
 
 function ProcessedNews({ data, ...props }) {
 
-    const [tooltipContent, setTooltipContent] = useState('Скопировать текст');
+    const [tooltipContent, setTooltipContent] = useState('Текст скопирован');
+    const [visible, setVisible] = useState(false);
+
+    const show = () => setVisible(true);
+    const hide = () => setVisible(false);
 
     const handleTextCopy = () => {
-        setTooltipContent('Текст скопирован')
+        show()
         setTimeout(() => {
-            setTooltipContent('Скопировать текст')
-        }, 5000)
+            hide()
+        }, 1500)
     }
 
     return (
@@ -43,7 +47,7 @@ function ProcessedNews({ data, ...props }) {
                 </div>
 
 
-                <Tippy content={tooltipContent}>
+                <Tippy content={tooltipContent} visible={visible} onClickOutside={hide}>
                     <div>
                         <CopyToClipboard text={data?.text}
                             onCopy={() => handleTextCopy()}>

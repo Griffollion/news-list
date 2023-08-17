@@ -18,6 +18,7 @@ import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
 import { Sugar } from 'react-preloaders';
 import { getNewsFullTexts } from 'store/fullNewsTextSlice';
 import { resetSelectedNews } from 'store/selectedNewsSlice';
+import Loader from 'components/shared/Loader/ui/Loader';
 
 function App() {
   const dispatch = useDispatch()
@@ -66,6 +67,7 @@ function App() {
                 <TagsFilter />
                 <Menu />
                 <NewsList data={todaysNews} loading={isNewsLoading} />
+
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
                     {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранных новостей</Button>}
@@ -74,7 +76,7 @@ function App() {
                     ><Button>
                         Посмотреть результат
                       </Button></NavLink>}
-                    {loading === 'loading' && <div className="preloader"><span>Loading...</span></div>}
+                    {loading === 'loading' && <Loader />}
                   </div>
                 </div>}
               </>
@@ -92,6 +94,7 @@ function App() {
                 <TagsFilter />
                 <Menu />
                 <NewsList data={allNews} loading={isNewsLoading} />
+
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
                     {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранных новостей</Button>}
@@ -100,7 +103,8 @@ function App() {
                     ><Button>
                         Посмотреть результат
                       </Button></NavLink>}
-                    {loading === 'loading' && <div className="preloader"><span>Loading...</span></div>}
+
+                    {loading === 'loading' && <Loader />}
                   </div>
                 </div>}
               </>

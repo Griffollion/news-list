@@ -4,15 +4,20 @@ import axios from "axios";
 
 export const getNewsFullTexts = createAsyncThunk(
     '@@full-news-texts/get-news-full-text',
-    async (data) => {
+    async ({data,prompt} ) => {
         try {
+            console.log('PROMPT', prompt)
+            console.log('DATA', data)
             const res = await axios({
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 url: process.env.REACT_APP_API_V1_URL + "/parser/detail",
-                data: data
+                data: {
+                    data,
+                    prompt
+                }
             })
             return res.data
         } catch (e) {

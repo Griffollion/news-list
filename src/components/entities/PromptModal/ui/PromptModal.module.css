@@ -1,0 +1,38 @@
+.prompt-text {
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 12px;
+    background-color: #EBF6FB;
+    cursor: pointer;
+    transition: background-color .25s;
+}
+
+@media (hover: hover) {
+    .prompt-text:hover {
+        background-color: rgba(149, 206, 90, 0.5);
+    }
+}
+
+.error {
+    color: #ED2C35;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 16px;
+    color: #ADB4BF;
+}
+
+.textarea {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    min-height: 200px;
+    resize: none;
+    border-color: #DADEE2;
+    padding: 12px;
+}

@@ -19,6 +19,7 @@ const PromptModal = () => {
         register,
         handleSubmit,
         formState: {errors},
+        setValue
     } = useForm()
 
     const handleNews = (data, prompt) => {
@@ -35,6 +36,11 @@ const PromptModal = () => {
 
     const handleClose = () => {
         dispatch(hidePromptModal())
+    }
+
+    const pastePromptInTextarea = (text) => {
+        setValue('prompt', '');
+        setValue('prompt', text);
     }
 
     return (
@@ -60,7 +66,7 @@ const PromptModal = () => {
                 {defaultPrompts.length && <div className={styles['prompts-list']}>
                     {defaultPrompts.map(item => <div key={item.id}>
                         <div
-                            className={cn(styles['prompt-text'])}>{item.text}</div>
+                            className={cn(styles['prompt-text'])} onClick={() => pastePromptInTextarea(item.text)}>{item.text}</div>
                     </div>)}
                 </div>}
 

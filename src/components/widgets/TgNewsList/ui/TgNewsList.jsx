@@ -22,7 +22,7 @@ function TgNewsList({ loading }) {
     }
     return (
         <>
-            <h1>Выжимка новостей</h1>
+            <h1>Рерайтнутая новость</h1>
 
             <div className={styles.mb20}>
                 <Button onClick={handleClick} appearance='ghost'> 

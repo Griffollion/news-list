@@ -58,7 +58,6 @@ function App() {
             <Route path="/news-list" element={
               <>
                 <h1>Список новостей на {parsedNews?.updateDate} {parsedNews?.updateTime}</h1>
-                <PromptModal/>
                 <div className='subtitle'>Ресурсы</div>
                 <SiteFilter />
 
@@ -70,7 +69,7 @@ function App() {
 
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
-                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбранных новостей</Button>}
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбраннойновости</Button>}
                     {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
                       to="/tg-news"
                     ><Button>
@@ -97,13 +96,12 @@ function App() {
 
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
-                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранной новости</Button>}
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбраннойновости</Button>}
                     {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
-                      to="/tg-news"
+                        to="/tg-news"
                     ><Button>
-                        Посмотреть результат
-                      </Button></NavLink>}
-
+                      Посмотреть результат
+                    </Button></NavLink>}
                     {loading === 'loading' && <Loader />}
                   </div>
                 </div>}
@@ -115,6 +113,7 @@ function App() {
           </Routes>
         </Container>
         <ToastContainer />
+        <PromptModal/>
       </div>
     </BrowserRouter>
   );

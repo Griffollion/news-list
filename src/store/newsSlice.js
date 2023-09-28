@@ -94,11 +94,11 @@ export const newsStore = createSlice({
                 state.loading = 'loading'
                 state.error = null
             })
-            .addCase(getParsedNews.rejected, (state) => {
+            .addCase(getParsedNews.rejected, (state, action) => {
                 state.loading = 'idle'
-                state.error = "Не сработал парсинг новостей"
+                state.error = action.payload?.error
                 toast.dismiss();
-                toast.error('Неудалось получить список новостей от сервера 😢', {theme: "colored"});
+                toast.error(action.payload?.error ? action.payload?.error: 'Неудалось получить список новостей от сервера 😢', {theme: "colored"});
             })
     }
 })

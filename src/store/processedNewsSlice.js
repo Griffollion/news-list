@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 
 export const getTgNews = createAsyncThunk(
   '@@news/get-tg-news',
-  async () => {
+  async (stub,{ rejectWithValue}) => {
     try {
       const res = await axios({
         method: 'POST',
@@ -16,7 +17,10 @@ export const getTgNews = createAsyncThunk(
       })
       return res.data?.items
     } catch (e) {
-      console.log(e)
+        if (!e.response) {
+            throw e
+        }
+        return rejectWithValue(e.response.data)
     }
   })
 
@@ -42,9 +46,11 @@ export const processedNewsStore = createSlice({
             state.loading = 'loading'
             state.error = null
         })
-        .addCase(getTgNews.rejected, (state) => {
+        .addCase(getTgNews.rejected, (state, action) => {
             state.loading = 'idle'
-            state.error = "Не удалось получить новости для Telegram"
+            state.error = "Не удалось загрузить рерайтнутую новость"
+            toast.dismiss();
+            toast.error(action.payload?.error ? action.payload?.error: 'Не удалось загрузить рерайтнутую новость', {theme: "colored"});
         })
 }
 })

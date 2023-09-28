@@ -81,7 +81,7 @@ const PromptModal = () => {
                     </div>
 
                     <div className={styles['form__row']}>
-                        <Button type="submit">Рерайтнуть новости</Button>
+                        <Button type="submit">Рерайтнуть новость</Button>
                     </div>
                 </form>
 

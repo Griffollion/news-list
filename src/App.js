@@ -97,7 +97,7 @@ function App() {
 
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
-                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранных новостей</Button>}
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => handleNews(selectedNews)}>Сделать выжимку выбранной новости</Button>}
                     {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
                       to="/tg-news"
                     ><Button>

@@ -53,11 +53,11 @@ export const fullNewsTextStore = createSlice({
                 state.loading = 'loading'
                 state.error = null
             })
-            .addCase(getNewsFullTexts.rejected, (state) => {
+            .addCase(getNewsFullTexts.rejected, (state, action) => {
                 state.loading = 'idle'
-                state.error = "Не удалось получить полные тексты для новостей"
+                state.error = action.payload?.error
                 toast.dismiss();
-                toast.error('Сервер не смог вернуть рерайтнутую новость 😢', {theme: "colored"});
+                toast.error(action.payload?.error, {theme: "colored"});
             })
     }
 })

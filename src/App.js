@@ -1,4 +1,4 @@
-
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -19,6 +19,7 @@ import { resetSelectedNews } from 'store/selectedNewsSlice';
 import Loader from 'components/shared/Loader/ui/Loader';
 import {PromptModal} from "./components/entities/PromptModal/index";
 import {showPromptModal} from "components/entities/PromptModal/model/promptModalSlice";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const dispatch = useDispatch()
@@ -113,7 +114,7 @@ function App() {
             <Route path="/tg-news" element={<TgNewsList />} />
           </Routes>
         </Container>
-
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );

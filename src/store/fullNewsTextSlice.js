@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 
 export const getNewsFullTexts = createAsyncThunk(
     '@@full-news-texts/get-news-full-text',
-    async ({data,prompt} ) => {
+    async ({data,prompt}, {rejectWithValue} ) => {
         try {
             console.log('PROMPT', prompt)
             console.log('DATA', data)
@@ -21,7 +22,11 @@ export const getNewsFullTexts = createAsyncThunk(
             })
             return res.data
         } catch (e) {
-            console.log(e)
+            if (!e.response) {
+                throw e
+            }
+
+            return rejectWithValue(e.response.data)
         }
     })
 
@@ -41,6 +46,8 @@ export const fullNewsTextStore = createSlice({
             .addCase(getNewsFullTexts.fulfilled, (state, action) => {
                 state.newsFullTexts = action.payload?.data
                 state.loading = 'idle'
+                toast.dismiss();
+                toast.success('Новости успешно рерайтнуты 👌', {theme: "colored"});
             })
             .addCase(getNewsFullTexts.pending, (state) => {
                 state.loading = 'loading'
@@ -49,6 +56,8 @@ export const fullNewsTextStore = createSlice({
             .addCase(getNewsFullTexts.rejected, (state) => {
                 state.loading = 'idle'
                 state.error = "Не удалось получить полные тексты для новостей"
+                toast.dismiss();
+                toast.error('Сервер не смог вернуть рерайтнутую новость 😢', {theme: "colored"});
             })
     }
 })

@@ -39,7 +39,7 @@ export const fullNewsTextStore = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getNewsFullTexts.fulfilled, (state, action) => {
-                state.newsFullTexts = action.payload?.data?.items
+                state.newsFullTexts = action.payload?.data
                 state.loading = 'idle'
             })
             .addCase(getNewsFullTexts.pending, (state) => {

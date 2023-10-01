@@ -1,0 +1,31 @@
+.logo {
+    width: 160px;
+    height: 160px;
+}
+
+.main-gear {
+    display: inline-flex;
+    transform-origin: 50% 50%;
+    animation: split 30s linear infinite;
+}
+
+.logo:hover .xx {
+    transform: rotate(180deg);
+}
+
+@media screen and (min-width: 1200px) {
+    .logo {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+@keyframes split {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -88,12 +88,13 @@ const PromptModal = () => {
 
                 <h2>Введите промпт для нейросети на английском</h2>
 
-                <h3>Выбрать из готовых промптов</h3>
-                {prompts.length && <div className={styles['prompts-list']}>
+                <h3>Выбрать из сохраненных промптов</h3>
+                {!!prompts.length && <div className={styles['prompts-list']}>
                     {prompts.map(item => <div key={item.id}>
                         <Prompt text={item.text} id={item.id} onClick={() => pastePromptInTextarea(item.text)   }/>
                     </div>)}
                 </div>}
+                {!prompts.length && <div className={styles['prompts-list']}>Сохраненные промпты отсутствуют</div>}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={styles['form']}>
 

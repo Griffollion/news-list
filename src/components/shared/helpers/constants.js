@@ -1,0 +1,1 @@
+export const GLOBAL_BREAKPOINTS = { mobile: 0,tablet: 740, largeTablet: 991, smallDesktop: 1024, desktop: 1200 }

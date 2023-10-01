@@ -7,7 +7,6 @@
     background-color: #95CE5A;
     display: inline-block;
     text-align: center;
-    font-size: 16px;
     cursor: pointer;
     transition: background-color .25s, border-color .25s;
 }
@@ -22,6 +21,7 @@
 
 .button.block {
     display: block;
+    width: 100%;
 }
 
 /* ghost */

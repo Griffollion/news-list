@@ -1,0 +1,41 @@
+.prompt {
+    border-radius: 8px;
+    background-color: #EBF6FB;
+    cursor: pointer;
+    transition: background-color .25s;
+    display: inline-block;
+    position: relative;
+    padding-right: 28px;
+}
+
+.prompt-text {
+    font-size: 14px;
+    line-height: 22px;
+    padding: 12px;
+}
+
+.prompt.is-active {
+    background-color: rgba(149, 206, 90, 0.5)
+}
+
+.prompt.is-delete {
+    background-color: rgba(255, 0, 0, 0.5)
+}
+
+.delete-btn {
+    width: 20px;
+    height: 20px;
+    color: #ADB4BF;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.is-delete .delete-btn {
+    color: inherit;
+}
+@media (hover: hover) {
+    .delete-btn:hover {
+        color: inherit;
+    }
+}

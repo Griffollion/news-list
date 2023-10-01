@@ -14,12 +14,10 @@ import { SiteFilter } from 'components/widgets/SiteFilter';
 import { TagsFilter } from 'components/widgets/TagsFilter';
 import { NavLink } from 'react-router-dom';
 import TgNewsList from 'components/widgets/TgNewsList/ui/TgNewsList';
-import { getNewsFullTexts } from 'store/fullNewsTextSlice';
-import { resetSelectedNews } from 'store/selectedNewsSlice';
 import Loader from 'components/shared/Loader/ui/Loader';
 import {PromptModal} from "./components/entities/PromptModal/index";
 import {showPromptModal} from "components/entities/PromptModal/model/promptModalSlice";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Slide } from 'react-toastify';
 
 function App() {
   const dispatch = useDispatch()
@@ -43,12 +41,6 @@ function App() {
     }
   }, [dispatch, parsedNews])
 
-
-  const handleNews = (data) => {
-    dispatch(getNewsFullTexts(data))
-    dispatch(resetSelectedNews())
-  }
-
   return (
     <BrowserRouter>
 
@@ -69,7 +61,7 @@ function App() {
 
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
-                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбраннойновости</Button>}
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбранной новости</Button>}
                     {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
                       to="/tg-news"
                     ><Button>
@@ -96,7 +88,7 @@ function App() {
 
                 {<div className='floating-button'>
                   <div className='floating-button-wrapper'>
-                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбраннойновости</Button>}
+                    {loading === 'idle' && !!selectedNews?.length && <Button onClick={() => dispatch(showPromptModal())}>Задать промпт для выбранной новости</Button>}
                     {loading === 'idle' && !selectedNews?.length && !!newsFullTexts?.length && <NavLink
                         to="/tg-news"
                     ><Button>
@@ -112,7 +104,7 @@ function App() {
             <Route path="/tg-news" element={<TgNewsList />} />
           </Routes>
         </Container>
-        <ToastContainer />
+        <ToastContainer transition={Slide} />
         <PromptModal/>
       </div>
     </BrowserRouter>

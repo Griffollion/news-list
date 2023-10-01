@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Main.module.css'
+import { NavLink } from 'react-router-dom';
 import {ReactComponent as NalIcon} from 'images/icons/nal.svg'
 import {GLOBAL_BREAKPOINTS} from "components/shared/helpers/constants";
 import {Button} from "components/shared/Button";
@@ -19,7 +20,9 @@ const Main = () => {
                     <NalIcon/>
                 </div>
                 <div className={styles['btn-wrapper']}>
-                    <Button size={breakpoint === "mobile" ? '': "l"}>К списку сегодняшних новостей</Button>
+                    <NavLink to="/news-list">
+                        <Button size={breakpoint === "mobile" ? '': "l"}>К списку сегодняшних новостей</Button>
+                    </NavLink>
                 </div>
             </div>
         </>

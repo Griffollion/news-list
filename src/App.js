@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-//import parsedNews from 'mock/data.json'
 import { Menu } from 'components/widgets/Menu';
 import { Container } from 'components/shared/Container';
 import { Button } from 'components/shared/Button';

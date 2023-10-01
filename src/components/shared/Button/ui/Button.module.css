@@ -1,7 +1,7 @@
 .button {
     font-size: 16px;
     color: #fff;
-    padding: 11px 23px;
+    padding: 11px 23px 10px 23px;
     border: 1px solid #95CE5A;
     border-radius: 8px;
     background-color: #95CE5A;
@@ -11,13 +11,15 @@
     transition: background-color .25s, border-color .25s;
 }
 
+.button.l {
+    font-size: 18px;
+    padding: 15px 23px 14px 23px ;
+}
 
 .button a {
     color: initial;
     text-decoration: none;
 }
-
-
 
 .button.block {
     display: block;
@@ -34,7 +36,7 @@
 /* ghost //end */
 
 
-@media (hover:hover) {
+@media (hover: hover) {
     .button:hover {
         background-color: #83b54e;
         border-color: #83b54e;

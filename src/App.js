@@ -18,6 +18,7 @@ import Loader from 'components/shared/Loader/ui/Loader';
 import {PromptModal} from "./components/entities/PromptModal/index";
 import {showPromptModal} from "components/entities/PromptModal/model/promptModalSlice";
 import { ToastContainer, Slide } from 'react-toastify';
+import {MainPage} from "./components/pages/main";
 
 function App() {
   const dispatch = useDispatch()
@@ -46,6 +47,9 @@ function App() {
 
       <div className="App">
         <Container>
+          <Routes>
+            <Route path="/" element={<MainPage/>}/>
+          </Routes>
           <Routes>
             <Route path="/news-list" element={
               <>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a0af21e-c7e6-4a52-bc61-1a97e6173876" name="Default Changelist" comment="" />
+    <list default="true" id="3a0af21e-c7e6-4a52-bc61-1a97e6173876" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/mock/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock/data.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +38,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696503769252</updated>
       <workItem from="1696503773305" duration="173000" />
+      <workItem from="1696504462820" duration="146000" />
     </task>
     <servers />
   </component>
